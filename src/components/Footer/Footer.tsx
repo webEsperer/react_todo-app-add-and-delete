@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FilterStatus } from '../../types/FilterStatus';
 import { Todo } from '../../types/Todo';
 
@@ -31,7 +32,9 @@ export const Footer: React.FC<Props> = ({
           <a
             key={value}
             href="#/"
-            className={`filter__link ${filterStatus === value ? 'selected' : ''}`}
+            className={classNames('filter__link', {
+              selected: filterStatus === value,
+            })}
             data-cy={`FilterLink${value}`}
             onClick={() => setFilterStatus(value)}
           >
