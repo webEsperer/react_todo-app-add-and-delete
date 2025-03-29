@@ -6,12 +6,11 @@ import { Todo } from '../../types/Todo';
 type Props = {
   todo: Todo;
   removeTodo: (id: number) => void;
-  deleteTodosId?: number[];
+  isProcessing?: boolean;
 };
 
-export const TodoItem = ({ todo, removeTodo, deleteTodosId }: Props) => {
+export const TodoItem = ({ todo, removeTodo, isProcessing }: Props) => {
   const { title, completed, id } = todo;
-  const isDelete = deleteTodosId?.includes(id);
 
   return (
     <div data-cy="Todo" className={classNames('todo', { completed })}>
@@ -41,7 +40,7 @@ export const TodoItem = ({ todo, removeTodo, deleteTodosId }: Props) => {
       <div
         data-cy="TodoLoader"
         className={classNames('modal overlay', {
-          'is-active': (todo && !id) || isDelete,
+          'is-active': (todo && !id) || isProcessing,
         })}
       >
         <div className="modal-background has-background-white-ter" />

@@ -10,7 +10,7 @@ export const useTodos = () => {
   );
   const [error, setError] = useState<string>('');
   const [tempTodo, setTempTodo] = useState<Todo | null>(null);
-  const [deleteTodosId, setDeleteTodosId] = useState<number[]>([]);
+  const [processingTodoIds, setProcessingTodoIds] = useState<number[]>([]);
 
   useEffect(() => {
     setError('');
@@ -31,16 +31,16 @@ export const useTodos = () => {
   }, [todos, filterStatus]);
 
   const removeTodo = (id: number) => {
-    setDeleteTodosId(prev => [...prev, id]);
+    setProcessingTodoIds(prev => [...prev, id]);
 
     return deleteTodo(id)
       .then(() => {
         setTodos(prevTodos => prevTodos.filter(prevTodo => prevTodo.id !== id));
       })
       .catch(() => setError('Unable to delete a todo'))
-      .finally(() =>
-        setDeleteTodosId(prev => prev.filter(prevTodo => prevTodo !== id)),
-      );
+      .finally(() => {
+        setProcessingTodoIds(prev => prev.filter(prevTodo => prevTodo !== id));
+      });
   };
 
   const deleteAllCompletedTodos = () => {
@@ -62,7 +62,7 @@ export const useTodos = () => {
     setError,
     tempTodo,
     setTempTodo,
-    deleteTodosId,
+    processingTodoIds,
     filteredTodos,
     removeTodo,
     deleteAllCompletedTodos,

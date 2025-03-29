@@ -19,7 +19,7 @@ export const App: React.FC = () => {
     setError,
     tempTodo,
     setTempTodo,
-    deleteTodosId,
+    processingTodoIds,
     filteredTodos,
     removeTodo,
     deleteAllCompletedTodos,
@@ -47,7 +47,7 @@ export const App: React.FC = () => {
               filteredTodos={filteredTodos}
               tempTodo={tempTodo}
               removeTodo={removeTodo}
-              deleteTodosId={deleteTodosId}
+              processingTodoIds={processingTodoIds}
             />
             <Footer
               setFilterStatus={setFilterStatus}

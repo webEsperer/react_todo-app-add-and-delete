@@ -5,14 +5,14 @@ type Props = {
   filteredTodos: Todo[];
   tempTodo: Todo | null;
   removeTodo: (id: number) => void;
-  deleteTodosId: number[];
+  processingTodoIds: number[];
 };
 
 export const TodoList: React.FC<Props> = ({
   filteredTodos,
   tempTodo,
   removeTodo,
-  deleteTodosId,
+  processingTodoIds,
 }) => {
   return (
     <section className="todoapp__main" data-cy="TodoList">
@@ -21,7 +21,7 @@ export const TodoList: React.FC<Props> = ({
           key={todo.id}
           todo={todo}
           removeTodo={removeTodo}
-          deleteTodosId={deleteTodosId}
+          isProcessing={processingTodoIds?.includes(todo.id)}
         />
       ))}
       {tempTodo && <TodoItem todo={tempTodo} removeTodo={removeTodo} />}
